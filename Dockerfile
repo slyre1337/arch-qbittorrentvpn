@@ -1,5 +1,4 @@
-FROM binhex/arch-int-openvpn:latest
-MAINTAINER binhex
+FROM slyre/arch-int-openvpn:latest
 
 # additional files
 ##################
