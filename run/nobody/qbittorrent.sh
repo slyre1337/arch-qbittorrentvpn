@@ -83,7 +83,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 	fi
 	
 	if [[ "${DEBUG}" == "true" ]]; then
-		echo "[info] ---------------------------------------- Perfect Privacy --- qbittorrent config --- VPN INCOMING PORT value before calculating: "$VPN_INCOMING_PORT""
+		echo "[info] ---------------------------------------- Perfect Privacy --- qbittorrent config --- VPN INCOMING PORT value before calculating: $VPN_INCOMING_PORT"
 	fi
 	
 	# get internal perfect privacy IP (from interface "tun0")
@@ -94,7 +94,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 	)
 	
 	if [[ "${DEBUG}" == "true" ]]; then
-		echo "[info]  ---------------------------------------- Perfect Privacy --- qbittorrent config --- Found internal IP from dev=tun0: "$IPv4_ADDR""
+		echo "[info]  ---------------------------------------- Perfect Privacy --- qbittorrent config --- Found internal IP from dev=tun0: $IPv4_ADDR"
 	fi
 	
 	# convert internal IP into Port
@@ -111,7 +111,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 	done
 	
 	if [[ "${DEBUG}" == "true" ]]; then
-		echo "[info] ---------------------------------------- Perfect Privacy --- qbittorrent config --- Calculated the port: "$VPN_INCOMING_PORT""
+		echo "[info] ---------------------------------------- Perfect Privacy --- qbittorrent config --- Calculated the port: $VPN_INCOMING_PORT"
 	fi
 	
 	# note -k flag required to support insecure connection (self signed certs) when https used
