@@ -92,10 +92,9 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 	port_bin="$(d2b ${ADDR[2]})$(d2b ${ADDR[3]})"
 	port_dec=$(printf "%04d" $(echo "ibase=2;${port_bin:4}"|bc))
 	for i in 1 2 3; do
-	echo "$i$port_dec
-	VPN_INCOMING_PORT=$i$port_dec
-	echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX SET FOR TESTING "$VPN_INCOMING_PORT"
-	
+		VPN_INCOMING_PORT=$i$port_dec
+		echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX SET FOR TESTING "$VPN_INCOMING_PORT"
+		
 	curl -k -i -X POST -d "json={\"random_port\": false}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
 	curl -k -i -X POST -d "json={\"listen_port\": ${VPN_INCOMING_PORT}}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
 
