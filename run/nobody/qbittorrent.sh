@@ -94,6 +94,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 	for i in 1 2 3; do
 		VPN_INCOMING_PORT=$i$port_dec
 		echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX SET FOR TESTING "$VPN_INCOMING_PORT"
+	done
 		
 	curl -k -i -X POST -d "json={\"random_port\": false}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
 	curl -k -i -X POST -d "json={\"listen_port\": ${VPN_INCOMING_PORT}}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
