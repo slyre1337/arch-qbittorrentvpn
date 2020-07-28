@@ -89,7 +89,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 		awk '/inet /{gsub("/.*", "");print $2}'
 	)
 	
-	echo [info] ------ "$IPv4_ADDR" ------ THIS IS THE INTERNAL IP ------
+	echo "[info]  ---------------------------------------- Perfect Privacy: Found internal IP from dev=tun0: "$IPv4_ADDR" ----------------------------------------
 	
 	# convert internal IP into Port
 	IFS='.' read -ra ADDR <<< "$IPv4_ADDR"
@@ -104,7 +104,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 		VPN_INCOMING_PORT=$i$port_dec
 	done
 	
-	echo [info] ------ "$VPN_INCOMING_PORT" ------ THIS IS THE CALCULATED PORT ------
+	echo "[info] ---------------------------------------- Perfect Privacy: Calculated the port: "$VPN_INCOMING_PORT" ----------------------------------------
 	
 	# note -k flag required to support insecure connection (self signed certs) when https used
 	curl -k -i -X POST -d "json={\"random_port\": false}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
