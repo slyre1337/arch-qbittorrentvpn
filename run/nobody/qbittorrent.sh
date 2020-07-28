@@ -82,6 +82,8 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 		web_protocol="http"
 	fi
 	
+	echo "[info] ---------------------------------------- Perfect Privacy >>> qbittorrent config >>> VPN INCOMING PORT value before calculating: "$VPN_INCOMING_PORT" ----------------------------------------
+	
 	# get internal perfect privacy IP (from interface "tun0")
 	interface_name=tun0
 	IPv4_ADDR=$(
