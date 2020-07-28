@@ -83,9 +83,13 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 	fi
 	
 	# get internal perfect privacy IP (from interface "tun0")
-	IPv4_ADDR="$(ifconfig | grep -A 1 'tun0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+	interface_name=tun0
+	IPv4_ADDR=$(
+	    ip a s dev $interface_name |
+		awk '/inet /{gsub("/.*", "");print $2}'
+	)
 	
-	echo **************************************************************** "$IPv4_ADDR" *** THIS IS THE INTERNAL IP ***
+	echo [info] ------ "$IPv4_ADDR" ------ THIS IS THE INTERNAL IP ------
 	
 	# convert internal IP into Port
 	IFS='.' read -ra ADDR <<< "$IPv4_ADDR"
@@ -100,7 +104,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 		VPN_INCOMING_PORT=$i$port_dec
 	done
 	
-	echo **************************************************************** "$VPN_INCOMING_PORT" *** THIS IS THE CALCULATED PORT ***
+	echo [info] ------ "$VPN_INCOMING_PORT" ------ THIS IS THE CALCULATED PORT ------
 	
 	# note -k flag required to support insecure connection (self signed certs) when https used
 	curl -k -i -X POST -d "json={\"random_port\": false}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
