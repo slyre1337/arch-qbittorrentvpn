@@ -65,6 +65,25 @@ if [[ "${VPN_PROV}" == "pia" ]]; then
 
 	# note -k flag required to support insecure connection (self signed certs) when https used
 	
+	curl -k -i -X POST -d "json={\"random_port\": false}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
+	curl -k -i -X POST -d "json={\"listen_port\": ${VPN_INCOMING_PORT}}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
+
+	# set qbittorrent port to current vpn port (used when checking for changes on next run)s
+	qbittorrent_port="${VPN_INCOMING_PORT}"
+
+fi
+
+if [[ "${VPN_PROV}" == "custom" ]]; then
+
+	# identify protocol, used by curl to connect to api
+	if grep -q 'WebUI\\HTTPS\\Enabled=true' '/config/qBittorrent/config/qBittorrent.conf'; then
+		web_protocol="https"
+	else
+		web_protocol="http"
+	fi
+
+	# note -k flag required to support insecure connection (self signed certs) when https used
+	
 	IPv4_ADDR=${vpn_ip}
 	IFS='.' read -ra ADDR <<< "$IPv4_ADDR"
 	function d2b() {
@@ -84,6 +103,7 @@ if [[ "${VPN_PROV}" == "pia" ]]; then
 	qbittorrent_port="${VPN_INCOMING_PORT}"
 
 fi
+
 
 # set qbittorrent ip to current vpn ip (used when checking for changes on next run)
 qbittorrent_ip="${vpn_ip}"
