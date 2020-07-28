@@ -1,3 +1,6 @@
+FORKED FOR PERFECT-PRIVACY.COM AUTOMATIC PORT FORWARDING SUPPORT
+
+
 **Application**
 
 [qBittorrent](https://www.qbittorrent.org/)  
