@@ -22,11 +22,11 @@ ADD config/nobody/ /home/nobody/
 # install app
 #############
 
+RUN pacman -S bc --noconfirm
+
 # make executable and run bash scripts to install app
 RUN chmod +x /root/*.sh /home/nobody/*.sh && \
 	/bin/bash /root/install.sh
-
-RUN pacman -S bc --noconfirm
 
 # docker settings
 #################
