@@ -82,7 +82,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 		web_protocol="http"
 	fi
 	
-	echo "[info] ---------------------------------------- Perfect Privacy >>> qbittorrent config >>> VPN INCOMING PORT value before calculating: "$VPN_INCOMING_PORT" ----------------------------------------
+	echo "[info] ---------------------------------------- Perfect Privacy --- qbittorrent config --- VPN INCOMING PORT value before calculating: "$VPN_INCOMING_PORT" ----------------------------------------
 	
 	# get internal perfect privacy IP (from interface "tun0")
 	interface_name=tun0
@@ -91,7 +91,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 		awk '/inet /{gsub("/.*", "");print $2}'
 	)
 	
-	echo "[info]  ---------------------------------------- Perfect Privacy >>> qbittorrent config >>> Found internal IP from dev=tun0: "$IPv4_ADDR" ----------------------------------------
+	echo "[info]  ---------------------------------------- Perfect Privacy --- qbittorrent config --- Found internal IP from dev=tun0: "$IPv4_ADDR" ----------------------------------------
 	
 	# convert internal IP into Port
 	IFS='.' read -ra ADDR <<< "$IPv4_ADDR"
@@ -106,7 +106,7 @@ if [[ "${VPN_PROV}" == "custom" ]]; then
 		VPN_INCOMING_PORT=$i$port_dec
 	done
 	
-	echo "[info] ---------------------------------------- Perfect Privacy >>> qbittorrent config >>> Calculated the port: "$VPN_INCOMING_PORT" ----------------------------------------
+	echo "[info] ---------------------------------------- Perfect Privacy --- qbittorrent config --- Calculated the port: "$VPN_INCOMING_PORT" ----------------------------------------
 	
 	# note -k flag required to support insecure connection (self signed certs) when https used
 	curl -k -i -X POST -d "json={\"random_port\": false}" "${web_protocol}://localhost:${WEBUI_PORT}/api/v2/app/setPreferences" &> /dev/null
